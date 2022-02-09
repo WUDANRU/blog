@@ -1,0 +1,28 @@
+//安装express(express-test)
+npm install express-generator -g
+express express-test
+npm install 
+cd express-test
+npm start
+
+
+//bin>www文件有个3000端口
+npm i nodemon cross-env --save-dev
+//package.json文件的scripts添加: "dev": "cross-env NODE_ENV=dev nodemon ./bin/www"
+npm run dev
+//浏览器打开localhost:3000
+
+
+//安装mysql xss,然后拷贝blog-1很多的文件
+npm i mysql xss --save
+
+
+//使用express-session和connect-redis,简单方便
+//req.session保存登录信息，登录校验做成express中间件
+npm i express-session --save
+npm i redis connect-redis --save
+
+
+
+//--------------------------------------------------------------------------------------------------------------------
+//express-test2安装express:npm i express --save(默认3000端口)/node app.js

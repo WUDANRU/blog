@@ -1,0 +1,72 @@
+//安装koa2
+npm install koa-generator -g (安装 koa-generator 脚手架)
+koa2 blog-koa2
+npm install 
+npm run dev
+npm i cross-env --save-dev
+吧package.json的"dev": "./node_modules/.bin/nodemon bin/www"改成："dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www"
+吧package.json的"prd": "pm2 start bin/www",改成："prd": "cross-env NODE_ENV=production pm2 start bin/www"
+
+
+//---------------------------------------------------
+npm i koa-generic-session koa-redis redis --save
+
+//app.js的session配置代码（测试http://localhost:8000/api/user/session-test）
+D:\下载2\Redis-x64-5.0.9>redis-cli.exe -h 127.0.0.1 -p 6379
+127.0.0.1:6379> keys *
+1) "koa:sess:J1IRALos4BqPb9JbTDZcWwb5m9hunOmN"(chrome的session)
+2) "koa:sess:VHzX69hUP_7S2aPxyNCmjz7jZIsUt7So"(其他浏览器的session)
+3) "1609087080744_0.19315368837777247"
+127.0.0.1:6379> get VHzX69hUP_7S2aPxyNCmjz7jZIsUt7So
+(nil)
+127.0.0.1:6379> get koa:sess:J1IRALos4BqPb9JbTDZcWwb5m9hunOmN
+"{\"cookie\":{\"path\":\"/\",\"httpOnly\":true,\"maxAge\":86400000,\"overwrite\":true,\"signed\":true},\"viewCount\":1}"
+127.0.0.1:6379>
+
+//---------------------------------------------------
+
+--- blog-1拿到的 ---  (blog-1通过redis拿到session值，blog-koa2通过D:\旧电脑\blog-1-promise-test-\blog-koa2\blog-koa2>npm run dev打印出session值)
+127.0.0.1:6379> get 1639974191067_0.4200410509612982
+"{\"username\":\"lala\",\"realname\":\"jenny\"}"
+
+--- blog-koa2的user.js的console.log(ctx.session,'ctx.session') ---
+{
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    maxAge: 86400000,
+    overwrite: true,
+    signed: true
+  },
+  username: 'lala',
+  realname: 'jenny'
+} ctx.session
+//---------------------------------------------------
+
+npm i mysql xss --save
+
+npm i koa-morgan --save
+
+使用mongodb重构项目：
+基于koa2代码，定义Schema和Model，完善数据操作
+
+npm i mongoose --save
+package.json的"mysql": "^2.18.1"可以删除
+
+//pm2，线上进程，可以启动多进程，系统崩溃可以自动重启，
+cookie一开始是存储username,
+cookie改为存储userId,session存储userId对应的username，
+再后来cookie存储了userId,session改为存储redis(redis里有userId对应的username和realname,password是没有存进来的)
+
+cookie没有设置过期时间是存储在浏览器(内存)，设置过期时间是存储在本地(硬盘)
+session开始存储在server端，后来存储在redis(用redis可以让多进程之间数据可以共享，不用redis，server端的内存会暴增)
+nginx反向代理，前端8080端口，后端8000端口，8080的端口已经被代理到8000/api/blog的端口了
+nginx联调让前后端同域
+nginx是高性能的web服务器，一般用于反向代理，静态服务，负载均衡
+
+mysql关系型数据库(存储在硬盘)
+mongodb服务型数据库
+redis是内存高速缓存数据库
+sequelize是orm(对象关系映射)数据库
+
+commonjs)是动态引入(commonjs即nodejs的require等api     es6 module语法是静态引入

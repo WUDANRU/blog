@@ -1,0 +1,51 @@
+//安装koa2
+npm install koa-generatot -generator -g
+koa2 blog-koa2
+npm install 
+npm run dev
+npm i cross-env --save-dev
+吧package.json的"dev": "./node_modules/.bin/nodemon bin/www"改成："dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www"
+吧package.json的"prd": "pm2 start bin/www",改成："prd": "cross-env NODE_ENV=production pm2 start bin/www"
+
+
+//---------------------------------------------------
+npm i koa-generic-session koa-redis redis --save
+
+//app.js的session配置代码（测试http://localhost:8000/api/user/session-test）
+D:\下载2\Redis-x64-5.0.9>redis-cli.exe -h 127.0.0.1 -p 6379
+127.0.0.1:6379> keys *
+1) "koa:sess:J1IRALos4BqPb9JbTDZcWwb5m9hunOmN"(chrome的session)
+2) "koa:sess:VHzX69hUP_7S2aPxyNCmjz7jZIsUt7So"(其他浏览器的session)
+3) "1609087080744_0.19315368837777247"
+127.0.0.1:6379> get VHzX69hUP_7S2aPxyNCmjz7jZIsUt7So
+(nil)
+127.0.0.1:6379> get koa:sess:J1IRALos4BqPb9JbTDZcWwb5m9hunOmN
+"{\"cookie\":{\"path\":\"/\",\"httpOnly\":true,\"maxAge\":86400000,\"overwrite\":true,\"signed\":true},\"viewCount\":1}"
+127.0.0.1:6379>
+
+//---------------------------------------------------
+
+npm i mysql xss --save
+
+npm i koa-morgan --save
+
+使用mongodb重构项目(mongoose)：
+基于koa2代码，定义Schema和Model，完善数据操作
+
+npm i mongoose --save
+package.json的"mysql": "^2.18.1"可以删除
+
+//---------------------------------------------------
+Port 8000 is already in use端口被占用解决办法：
+cmd输入：netstat -ano | findstr :3000//查看是谁占用了3000号端口
+接着输入：taskkill -PID 18412 -F//结束端口号
+
+//---------------------------------------------------
+mongodb重构项目,用了npm run dev，没用npm run prd:
+D:\blog-koa2\blog-koa2 - mongodb>npm run dev
+D:\html-test>http-server -p 8001
+D:\nginx-1.18.0\nginx-1.18.0>nginx -t
+D:\nginx-1.18.0\nginx-1.18.0>start nginx
+D:\下载2\Redis-x64-5.0.9>redis-server.exe redis.windows.conf
+
+https://www.runoob.com/redis/redis-install.html

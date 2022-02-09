@@ -1,0 +1,2 @@
+::ffff:127.0.0.1 - - [17/Jan/2021:04:42:20 +0000] "GET /api/blog/list?isadmin=1 HTTP/1.0" 200 603 "http://localhost:8082/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+::1 - - [17/Jan/2021:04:42:23 +0000] "GET /api/blog/detail?id=32 HTTP/1.0" 200 223 "http://localhost:8082/detail.html?id=32" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
